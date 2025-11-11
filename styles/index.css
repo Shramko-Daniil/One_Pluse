@@ -1,0 +1,93 @@
+/* Basic styles */
+body {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	width: 100%;
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+button,
+a {
+	/* font-family: 'Gilroy'; */
+	font-family: 'Inter';
+}
+
+.container {
+	max-width: 1300px;
+}
+
+/* Text styles */
+.gradient-text {
+	background: linear-gradient(91.91deg, #092b96 0%, #086cdc 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	color: transparent;
+}
+
+/* Global btn styles */
+
+/* No transition because color bug */
+.btn {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	padding: 14.5px 51.5px;
+	border-radius: 12px;
+	font-weight: 600;
+	font-style: SemiBold;
+	font-size: 18px;
+	leading-trim: NONE;
+	line-height: 150%;
+	letter-spacing: 0%;
+}
+.btn-primary {
+	color: #f5f5f5;
+	border: none;
+	background: linear-gradient(91.91deg, #092b96 0%, #086cdc 100%);
+}
+
+.btn-primary:hover {
+	background: #092b96;
+}
+
+.btn-secondary {
+	border: none;
+	position: relative;
+	background-color: #fff;
+	background: linear-gradient(91.91deg, #092b96 0%, #086cdc 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	color: transparent;
+}
+
+/* Gradient border using pseudo-element */
+.btn-secondary::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 2px;
+	border-radius: 12px;
+	background: linear-gradient(91.91deg, #092b96 0%, #086cdc 100%);
+	-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+	-webkit-mask-composite: destination-out;
+	mask-composite: exclude;
+	pointer-events: none;
+}
+
+.btn-secondary:hover {
+	opacity: 0.8;
+}
