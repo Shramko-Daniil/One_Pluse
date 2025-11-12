@@ -12,6 +12,8 @@
 .header-wrapper {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	width: 100%;
 }
 
 .logo {
@@ -152,14 +154,20 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	overflow: hidden; /* Ensures the pseudo-element stays within rounded corners */
+	overflow: hidden;
+	cursor: pointer;
+	transition: opacity 0.2s ease;
+}
+
+.search-btn:hover {
+	opacity: 0.8;
 }
 
 .search-btn::before {
 	content: '';
 	position: absolute;
 	inset: 0;
-	padding: 2.11px; /* Border thickness */
+	padding: 2.11px;
 	border-radius: 10px;
 	background: linear-gradient(91.91deg, #092b96 0%, #086cdc 100%);
 	-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -170,6 +178,50 @@
 .search-btn svg {
 	width: 17.6px;
 	height: 17.6px;
+}
+
+/* Search bar */
+
+.search-bar {
+	display: none;
+	align-items: center;
+	gap: 12px;
+	padding: 10px 16px;
+	background: #f0f4f9;
+	border-bottom: 1px solid #086cdc;
+	border-radius: 12px;
+	width: 897px;
+	max-width: 897px;
+	flex: 0 1 897px; /* flex-grow:0, flex-shrink:1, flex-basis:897px */
+	margin-right: 20px;
+	box-shadow: 0 4px 12px rgba(8, 108, 220, 0.1);
+}
+
+.search-bar.is-active {
+	display: flex;
+}
+
+.search-bar__icon {
+	flex-shrink: 0;
+	width: 20px;
+	height: 20px;
+}
+
+.search-bar__input {
+	flex: 1;
+	border: none;
+	outline: none;
+	background: transparent;
+	font-family: Montserrat, 'Segoe UI', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: #131313;
+	padding: 0;
+}
+
+.search-bar__input::placeholder {
+	color: #6c7ba8;
+	opacity: 0.7;
 }
 
 .lang-btn {
