@@ -77,16 +77,18 @@
 
 .callus-dropdown {
 	position: absolute;
-	top: 0; /* align with top of button if needed */
+	top: calc(100% - 30px);
 	left: 0;
-	width: calc(100% - 22px);
+	padding: 40px 10px 8px 10px;
+	width: 100%;
+	min-width: unset;
 	background: #fff;
 	border: 1px solid #f0f4f9;
 	border-radius: 8px;
-	padding: 50px 10px 8px 10px;
+
 	display: none;
-	min-width: 200px;
-	z-index: 1; /* dropdown below button */
+	z-index: 1;
+	box-sizing: border-box;
 }
 
 .callus-dropdown.show {
