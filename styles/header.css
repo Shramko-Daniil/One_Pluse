@@ -27,7 +27,27 @@
 	margin-right: 54px;
 }
 
+.navigation-el:hover {
+	padding: 8px 0px 6px 0px;
+	border-bottom: 2px solid;
+	border-image: linear-gradient(91.91deg, #092b96 0%, #086cdc 100%);
+	border-image-slice: 1;
+	background: linear-gradient(91.91deg, #092b96 0%, #086cdc 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.navigation-el:hover .arrow-path {
+	fill: url(#hoverGradient);
+	stroke: url(#hoverGradient);
+}
+
 .navigation-link {
+	border: none;
+	display: flex;
+	align-items: center;
+	gap: 9px;
 	font-weight: 400;
 	font-style: Regular;
 	font-size: 16px;
@@ -36,6 +56,92 @@
 	letter-spacing: 0%;
 	color: #131313;
 	text-decoration: none;
+}
+
+#services-btn {
+	background-color: transparent;
+}
+
+.services-dropdown__container {
+	position: relative;
+}
+
+/* Скрываем выпадающее меню "Услуги" по умолчанию */
+.services-dropdown {
+	display: none;
+	position: absolute;
+	top: calc(100% + 8px);
+	left: 0;
+	background-color: white;
+	z-index: 3;
+	min-width: 280px;
+	height: auto;
+}
+
+.services-dropdown__el {
+	padding: 4px 28px 4px 16px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: #131313;
+	-webkit-text-fill-color: #131313;
+
+	font-weight: 400;
+	font-style: Regular;
+	font-size: 16px;
+	leading-trim: NONE;
+	line-height: 150%;
+	letter-spacing: 0%;
+	border-bottom: 1px solid #d6dde7;
+}
+
+.services-dropdown__el a {
+	text-decoration: none;
+}
+.services-dropdown__el a:hover {
+	border-image: linear-gradient(91.91deg, #092b96 0%, #086cdc 100%);
+	border-image-slice: 1;
+	background: linear-gradient(91.91deg, #092b96 0%, #086cdc 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.services-link__circle-inner {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: linear-gradient(90deg, #0b2f9a 0%, #2481eb 100%);
+}
+.services-link__circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 10px;
+	height: 10px;
+	background: #2483ed33;
+	border-radius: 50%;
+}
+
+/* Показываем меню, когда у родителя есть класс .open */
+.services-dropdown__container.open .services-dropdown {
+	display: block;
+}
+
+/* (Необязательно) Поворачиваем стрелку при открытии */
+.services-dropdown__container.open #services-btn svg {
+	transform: rotate(180deg);
+}
+
+/* (Необязательно) Плавный поворот стрелки */
+#services-btn svg {
+	transition: transform 0.2s ease-in-out;
+}
+
+.search-bar.focused {
+	box-shadow: 0 0 0 2px #2483ed;
+	border-radius: 8px;
+	transition: 0.2s ease;
 }
 
 /* Btn section */

@@ -9,19 +9,32 @@ const navigation = document.querySelector('.navigation');
 const headerWrapper = document.querySelector('.header-wrapper');
 const callusContainer = document.querySelector('.callus-container');
 
-// Toggle main dropdown
-callusBtn.addEventListener('click', e => {
-	e.stopPropagation();
-	dropdown.classList.toggle('show');
-});
+// 👇 Добавленные селекторы для меню "Услуги"
+const servicesBtn = document.getElementById('services-btn');
+const servicesContainer = document.querySelector(
+	'.services-dropdown__container'
+);
 
-// Toggle additional phones
-arrow.addEventListener('click', e => {
-	e.stopPropagation();
-	extraPhones.classList.toggle('show');
-});
+// ======================
+// 📞 CALL US DROPDOWN
+// ======================
+if (callusBtn && dropdown) {
+	callusBtn.addEventListener('click', e => {
+		e.stopPropagation();
+		dropdown.classList.toggle('show');
+	});
+}
 
-// Open search bar
+if (arrow && extraPhones) {
+	arrow.addEventListener('click', e => {
+		e.stopPropagation();
+		extraPhones.classList.toggle('show');
+	});
+}
+
+// ======================
+// 🔍 SEARCH BAR
+// ======================
 const openSearchBar = () => {
 	searchBar.classList.add('is-active');
 	if (navigation) navigation.style.display = 'none';
@@ -33,7 +46,6 @@ const openSearchBar = () => {
 	}, 100);
 };
 
-// Close search bar
 const closeSearchBar = () => {
 	searchBar.classList.remove('is-active');
 	if (navigation) navigation.style.display = '';
@@ -42,28 +54,61 @@ const closeSearchBar = () => {
 	searchInput.value = '';
 };
 
-// Toggle search bar
-searchBtn.addEventListener('click', e => {
-	e.stopPropagation();
-	if (searchBar.classList.contains('is-active')) {
-		closeSearchBar();
-	} else {
-		openSearchBar();
-	}
-});
+if (searchBtn) {
+	searchBtn.addEventListener('click', e => {
+		e.stopPropagation();
+		if (searchBar.classList.contains('is-active')) {
+			closeSearchBar();
+		} else {
+			openSearchBar();
+		}
+	});
+}
 
-// Close dropdown when clicking outside
+// ======================
+// 🧑‍💻 SERVICES DROPDOWN (Новая логика)
+// ======================
+if (servicesBtn && servicesContainer) {
+	servicesBtn.addEventListener('click', e => {
+		e.stopPropagation(); // Предотвращаем немедленное закрытие
+		servicesContainer.classList.toggle('open');
+	});
+}
+
+// ======================
+// 🌐 GLOBAL CLICK HANDLERS
+// ======================
 document.addEventListener('click', e => {
-	if (!callusBtn.contains(e.target) && !dropdown.contains(e.target)) {
-		dropdown.classList.remove('show');
-		extraPhones.classList.remove('show');
-	}
+	// Close call-us dropdown
 	if (
+		callusBtn &&
+		dropdown &&
+		!callusBtn.contains(e.target) &&
+		!dropdown.contains(e.target)
+	) {
+		dropdown.classList.remove('show');
+		extraPhones?.classList.remove('show');
+	}
+
+	// Close search bar
+	if (
+		searchBtn &&
+		searchBar &&
 		!searchBtn.contains(e.target) &&
 		!searchBar.contains(e.target) &&
 		searchBar.classList.contains('is-active')
 	) {
 		closeSearchBar();
+	}
+
+	// 👇 Обновленная логика для закрытия меню "Услуги"
+	// Close service dropdown
+	if (
+		servicesContainer &&
+		!servicesContainer.contains(e.target) &&
+		servicesContainer.classList.contains('open')
+	) {
+		servicesContainer.classList.remove('open');
 	}
 });
 
