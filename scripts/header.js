@@ -14,6 +14,36 @@ const servicesBtn = document.getElementById('services-btn');
 const servicesContainer = document.querySelector(
 	'.services-dropdown__container'
 );
+const serviceSubmenus = document.querySelectorAll(
+	'.services-dropdown__el--has-children'
+);
+const burgerBtn = document.getElementById('burger-btn');
+const navigationWrapper = document.getElementById('navigation-wrapper');
+const navigationClose = document.getElementById('navigation-close');
+const langBtnMobile = document.querySelector('.lang-btn--mobile');
+const callusBtnMobile = document.querySelector('.callus-btn--mobile');
+
+const resetServiceSubmenus = () => {
+	serviceSubmenus.forEach(item => {
+		item.classList.remove('open');
+	});
+};
+
+const setBurgerState = isOpen => {
+	if (!burgerBtn) return;
+	burgerBtn.classList.toggle('is-open', Boolean(isOpen));
+};
+
+const toggleMobileAuxButtons = isOpen => {
+	if (langBtnMobile) {
+		langBtnMobile.classList.toggle('is-hidden', Boolean(isOpen));
+	}
+	if (callusBtnMobile) {
+		callusBtnMobile.classList.toggle('is-hidden', !Boolean(isOpen));
+	}
+};
+
+toggleMobileAuxButtons(false);
 
 // ======================
 // 📞 CALL US DROPDOWN
@@ -72,13 +102,38 @@ if (servicesBtn && servicesContainer) {
 	servicesBtn.addEventListener('click', e => {
 		e.stopPropagation(); // Предотвращаем немедленное закрытие
 		servicesContainer.classList.toggle('open');
+		if (!servicesContainer.classList.contains('open')) {
+			resetServiceSubmenus();
+		}
 	});
 }
+
+serviceSubmenus.forEach(item => {
+	const toggle = item.querySelector('.services-link__toggle');
+	if (!toggle) return;
+
+	toggle.addEventListener('click', e => {
+		e.stopPropagation();
+		item.classList.toggle('open');
+	});
+});
 
 // ======================
 // 🌐 GLOBAL CLICK HANDLERS
 // ======================
 document.addEventListener('click', e => {
+	if (
+		navigationWrapper &&
+		navigationWrapper.classList.contains('open') &&
+		!navigationWrapper.contains(e.target) &&
+		!burgerBtn?.contains(e.target)
+	) {
+		navigationWrapper.classList.remove('open');
+		document.body.classList.remove('no-scroll');
+		setBurgerState(false);
+		toggleMobileAuxButtons(false);
+	}
+
 	// Close call-us dropdown
 	if (
 		callusBtn &&
@@ -109,12 +164,41 @@ document.addEventListener('click', e => {
 		servicesContainer.classList.contains('open')
 	) {
 		servicesContainer.classList.remove('open');
+		resetServiceSubmenus();
 	}
 });
 
 // Close search bar on Escape key
 document.addEventListener('keydown', e => {
+	if (e.key === 'Escape' && navigationWrapper?.classList.contains('open')) {
+		navigationWrapper.classList.remove('open');
+		document.body.classList.remove('no-scroll');
+		setBurgerState(false);
+		toggleMobileAuxButtons(false);
+	}
+
 	if (e.key === 'Escape' && searchBar.classList.contains('is-active')) {
 		closeSearchBar();
 	}
 });
+
+if (burgerBtn && navigationWrapper) {
+	burgerBtn.addEventListener('click', e => {
+		e.stopPropagation();
+		const isOpen = navigationWrapper.classList.toggle('open');
+		setBurgerState(isOpen);
+		toggleMobileAuxButtons(isOpen);
+		document.body.classList.toggle('no-scroll', isOpen);
+	});
+} else {
+	console.warn('Burger button or navigation wrapper not found');
+}
+
+if (navigationClose) {
+	navigationClose.addEventListener('click', () => {
+		navigationWrapper?.classList.remove('open');
+		document.body.classList.remove('no-scroll');
+		setBurgerState(false);
+		toggleMobileAuxButtons(false);
+	});
+}

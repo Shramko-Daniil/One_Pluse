@@ -14,8 +14,8 @@
 				<div class="header-wrapper">
 					<svg
 						class="logo"
-						width="242"
-						height="62"
+						width="167"
+						height="44"
 						viewBox="0 0 242 62"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -218,7 +218,125 @@
 						</defs>
 					</svg>
 
-					<nav>
+					<div class="header-controls">
+						<button class="lang-btn lang-btn--mobile" type="button">
+							Ru
+							<svg
+								width="5"
+								height="5"
+								viewBox="0 0 5 4"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									d="M0.762207 0.44043L3.81103 0.44043L2.28662 3.08008L0.762207 0.44043Z"
+									fill="white"
+									stroke="white"
+									stroke-width="0.88"
+								/>
+							</svg>
+						</button>
+						<button
+							class="burger-btn"
+							id="burger-btn"
+							aria-label="Открыть меню"
+						>
+							<img
+								src="./assets/header burger.png"
+								alt="Меню"
+								class="burger-btn__icon burger-btn__icon--default"
+							/>
+
+							<svg
+								class="burger-btn__icon burger-btn__icon--close"
+								width="12"
+								height="12"
+								viewBox="0 0 14 14"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path d="M13 1L1 13L13 1Z" fill="#131313" />
+								<path d="M1 1L13 13L1 1Z" fill="#131313" />
+								<path
+									d="M13 1L1 13M1 1L13 13"
+									stroke="black"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+							</svg>
+						</button>
+					</div>
+
+					<nav class="navigation-wrapper" id="navigation-wrapper">
+						<div class="navigation-mobile-actions">
+							<button
+								class="mobile-search-btn"
+								type="button"
+								aria-label="Поиск"
+							>
+								<svg
+									viewBox="0 0 20 20"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										d="M18.6559 18.6559L14.4124 14.4124M16.7004 8.87813C16.7004 13.1982 13.1982 16.7004 8.87813 16.7004C4.55804 16.7004 1.05591 13.1982 1.05591 8.87813C1.05591 4.55804 4.55804 1.05591 8.87813 1.05591C13.1982 1.05591 16.7004 4.55804 16.7004 8.87813Z"
+										stroke="#0A3BA8"
+										stroke-width="2.112"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									/>
+								</svg>
+							</button>
+							<button class="callus-btn callus-btn--mobile">
+								<svg
+									width="20"
+									height="20"
+									viewBox="0 0 20 20"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<g clip-path="url(#clip0_mobile_call)">
+										<path
+											d="M15.2051 13.2304C14.5517 12.5853 13.736 12.5853 13.0867 13.2304C12.5915 13.7215 12.0962 14.2126 11.6093 14.712C11.4761 14.8494 11.3638 14.8785 11.2014 14.7869C10.881 14.6121 10.5397 14.4706 10.2317 14.2792C8.79592 13.3761 7.59315 12.2149 6.52773 10.9081C5.99918 10.2589 5.52889 9.56385 5.20011 8.78143C5.13352 8.62328 5.14601 8.51924 5.27502 8.39022C5.77028 7.91162 6.25305 7.42052 6.73998 6.92943C7.41836 6.24689 7.41836 5.44782 6.73582 4.76112C6.34877 4.36991 5.96172 3.98703 5.57467 3.59582C5.17514 3.19628 4.77977 2.79259 4.37607 2.39721C3.72267 1.76046 2.90695 1.76046 2.25771 2.40138C1.75829 2.89247 1.27968 3.39605 0.771944 3.87882C0.301659 4.32413 0.0644358 4.86933 0.014494 5.50609C-0.0645804 6.54238 0.18929 7.5204 0.547206 8.47346C1.27968 10.4462 2.39505 12.1983 3.74764 13.8047C5.57467 15.9772 7.75546 17.696 10.3067 18.9363C11.4553 19.4939 12.6456 19.9226 13.9399 19.9934C14.8305 20.0433 15.6046 19.8186 16.2247 19.1235C16.6493 18.6491 17.1279 18.2163 17.5773 17.7626C18.2432 17.0884 18.2474 16.2727 17.5857 15.6068C16.7949 14.8119 16 14.0212 15.2051 13.2304Z"
+											fill="white"
+										/>
+										<path
+											d="M14.4106 9.91346L15.9463 9.65126C15.7049 8.24041 15.039 6.96273 14.0277 5.94725C12.9581 4.87767 11.6055 4.20345 10.1156 3.99536L9.89917 5.53939C11.052 5.7017 12.1008 6.22193 12.929 7.05013C13.7114 7.83255 14.2233 8.82306 14.4106 9.91346Z"
+											fill="white"
+										/>
+										<path
+											d="M16.8114 3.23789C15.0384 1.46496 12.7952 0.34543 10.319 0L10.1025 1.54403C12.2417 1.84368 14.1811 2.81338 15.7127 4.34077C17.1651 5.79324 18.1182 7.6286 18.4636 9.64708L19.9993 9.38488C19.5956 7.04595 18.4928 4.92342 16.8114 3.23789Z"
+											fill="white"
+										/>
+									</g>
+									<defs>
+										<clipPath id="clip0_mobile_call">
+											<rect width="20" height="20" fill="white" />
+										</clipPath>
+									</defs>
+								</svg>
+								<span>Заказать звонок</span>
+							</button>
+							<button class="lang-btn lang-btn--mobile-panel" type="button">
+								Ru
+								<svg
+									width="5"
+									height="4"
+									viewBox="0 0 5 4"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										d="M0.762207 0.44043L3.81103 0.44043L2.28662 3.08008L0.762207 0.44043Z"
+										fill="black"
+										stroke="black"
+										stroke-width="0.88"
+									/>
+								</svg>
+							</button>
+						</div>
 						<ul class="navigation">
 							<li class="navigation-el">
 								<a class="navigation-link" href="#">Главная</a>
@@ -301,11 +419,30 @@
 										</div>
 										<a href="#">Приглашения для визы</a>
 									</li>
-									<li class="services-dropdown__el">
-										<div class="services-link__circle">
-											<div class="services-link__circle-inner"></div>
-										</div>
-										<a href="#">Страхование</a>
+									<li
+										class="services-dropdown__el services-dropdown__el--has-children"
+									>
+										<button
+											class="services-link__toggle"
+											type="button"
+											id="insurance-toggle"
+										>
+											<div class="services-link__circle">
+												<div class="services-link__circle-inner"></div>
+											</div>
+											<span>Страхование</span>
+										</button>
+										<ul class="services-submenu">
+											<li class="services-submenu__el">
+												<a href="#">Страхование жизни</a>
+											</li>
+											<li class="services-submenu__el">
+												<a href="#">Страхование автомобиля</a>
+											</li>
+											<li class="services-submenu__el">
+												<a href="#">Страхование для карты побыту</a>
+											</li>
+										</ul>
 									</li>
 									<li class="services-dropdown__el">
 										<div class="services-link__circle">
@@ -343,6 +480,34 @@
 								<a class="navigation-link" href="#">Контакты</a>
 							</li>
 						</ul>
+						<hr class="navigation-mobile-divider" />
+						<div class="navigation-mobile-socials">
+							<a
+								href="#"
+								class="social-icon social-icon--instagram"
+								aria-label="Instagram"
+							></a>
+							<a
+								href="#"
+								class="social-icon social-icon--tiktok"
+								aria-label="TikTok"
+							></a>
+							<a
+								href="#"
+								class="social-icon social-icon--youtube"
+								aria-label="YouTube"
+							></a>
+							<a
+								href="#"
+								class="social-icon social-icon--facebook"
+								aria-label="Facebook"
+							></a>
+							<a
+								href="#"
+								class="social-icon social-icon--linkedin"
+								aria-label="LinkedIn"
+							></a>
+						</div>
 					</nav>
 
 					<div class="search-bar" id="search-bar">
