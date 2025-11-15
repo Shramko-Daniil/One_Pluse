@@ -8,9 +8,14 @@ const searchInput = document.getElementById('search-input');
 const navigation = document.querySelector('.navigation');
 const headerWrapper = document.querySelector('.header-wrapper');
 const callusContainer = document.querySelector('.callus-container');
-const phoneBtnHeaderControls = document.querySelector(
-	'#phone-btn__header-controls'
+const phoneBtnHeaderControlsWrapper = document.querySelector(
+	'.phone-btn__header-controls__wrapper'
 );
+const phoneBtnHeaderControls = document.querySelector(
+	'.phone-btn__header-controls'
+);
+const callusDropdownMobile = document.querySelector('.callus-dropdown__mobile');
+
 const header = document.querySelector('.header');
 const servicesBtn = document.getElementById('services-btn');
 const servicesContainer = document.querySelector(
@@ -40,6 +45,14 @@ const navOpenIconDown = document.querySelector('.nav-open__icon-down');
 
 const navigationWrapperInnerContent = document.querySelector(
 	'.navigation-wrapper__innerContent'
+);
+
+const navigationMobileActions = document.querySelector(
+	'.navigation-mobile-actions'
+);
+
+const navigationWrapperBottomsection = document.querySelector(
+	'.navigation-wrapper__bottomsection'
 );
 
 const resetServiceSubmenus = () => {
@@ -73,8 +86,11 @@ const toggleMobileAuxButtons = isOpen => {
 	if (callusBtnMobile) {
 		callusBtnMobile.classList.toggle('is-hidden', !Boolean(isOpen));
 	}
-	if (phoneBtnHeaderControls) {
-		phoneBtnHeaderControls.classList.toggle('is-hidden', Boolean(isOpen));
+	if (phoneBtnHeaderControlsWrapper) {
+		phoneBtnHeaderControlsWrapper.classList.toggle(
+			'is-hidden',
+			Boolean(isOpen)
+		);
 	}
 };
 
@@ -96,8 +112,6 @@ if (arrow && extraPhones) {
 		extraPhones.classList.toggle('show');
 	});
 }
-
-//search-mobile btn
 
 // ======================
 // 🔍 SEARCH BAR
@@ -265,5 +279,30 @@ if (navigationClose) {
 		document.body.classList.remove('no-scroll');
 		setBurgerState(false);
 		toggleMobileAuxButtons(false);
+	});
+}
+
+//callus-dropdown__mobile
+
+if (phoneBtnHeaderControls) {
+	let isOpen;
+
+	phoneBtnHeaderControls.addEventListener('click', e => {
+		e.stopPropagation();
+		isOpen = !isOpen;
+
+		if (isOpen) {
+			callusDropdownMobile.style.display = 'block';
+			navigationMobileActions.style.display = 'none';
+			navigationWrapperBottomsection.style.display = 'none';
+			headerWrapperInnerHeader.style.borderBottom = 'none';
+			setBurgerState(false);
+		} else {
+			callusDropdownMobile.style.display = 'none';
+			navigationMobileActions.style.display = 'flex';
+			navigationWrapperBottomsection.style.display = 'flex';
+			headerWrapperInnerHeader.style.borderBottom = '1px solid #D6DDE7';
+			setBurgerState(true);
+		}
 	});
 }
