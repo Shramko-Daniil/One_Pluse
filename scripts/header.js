@@ -1,4 +1,4 @@
-const callusBtn = document.querySelector('.callus-btn');
+const callusBtn = document.querySelector('#callus-btn');
 const dropdown = document.querySelector('.callus-dropdown');
 const arrow = document.querySelector('.arrow');
 const extraPhones = document.querySelector('.extra-phones');
@@ -8,8 +8,10 @@ const searchInput = document.getElementById('search-input');
 const navigation = document.querySelector('.navigation');
 const headerWrapper = document.querySelector('.header-wrapper');
 const callusContainer = document.querySelector('.callus-container');
-
-// 👇 Добавленные селекторы для меню "Услуги"
+const phoneBtnHeaderControls = document.querySelector(
+	'#phone-btn__header-controls'
+);
+const header = document.querySelector('.header');
 const servicesBtn = document.getElementById('services-btn');
 const servicesContainer = document.querySelector(
 	'.services-dropdown__container'
@@ -21,7 +23,24 @@ const burgerBtn = document.getElementById('burger-btn');
 const navigationWrapper = document.getElementById('navigation-wrapper');
 const navigationClose = document.getElementById('navigation-close');
 const langBtnMobile = document.querySelector('.lang-btn--mobile');
-const callusBtnMobile = document.querySelector('.callus-btn--mobile');
+const callusBtnMobile = document.querySelector('#callus-btn--mobile');
+const mobileSearchBtn = document.querySelector('#mobile-search-btn');
+const langBtnMobilePanel = document.querySelector('#lang-btn--mobile-panel');
+const headerWrapperInnerHeader = document.querySelector(
+	'.header-wrapper__inner-header'
+);
+
+const headerWrapperIconUp = document.querySelector('.header-wrapper__icon-up');
+const headerWrapperIconDown = document.querySelector(
+	'.header-wrapper__icon-down'
+);
+
+const navOpenIconUp = document.querySelector('.nav-open__icon-up');
+const navOpenIconDown = document.querySelector('.nav-open__icon-down');
+
+const navigationWrapperInnerContent = document.querySelector(
+	'.navigation-wrapper__innerContent'
+);
 
 const resetServiceSubmenus = () => {
 	serviceSubmenus.forEach(item => {
@@ -30,6 +49,19 @@ const resetServiceSubmenus = () => {
 };
 
 const setBurgerState = isOpen => {
+	if (isOpen) {
+		header.style.boxShadow = 'none';
+		headerWrapperInnerHeader.style.borderBottom = '1px solid #D6DDE7';
+		headerWrapperIconUp.style.display = 'block';
+		headerWrapperIconDown.style.display = 'block';
+	} else {
+		header.style.boxShadow = '';
+		headerWrapperInnerHeader.style.borderBottom = 'none';
+		headerWrapperIconUp.style.display = 'none';
+		headerWrapperIconDown.style.display = 'none';
+		navOpenIconUp.style.display = 'none';
+		navOpenIconDown.style.display = 'none';
+	}
 	if (!burgerBtn) return;
 	burgerBtn.classList.toggle('is-open', Boolean(isOpen));
 };
@@ -40,6 +72,9 @@ const toggleMobileAuxButtons = isOpen => {
 	}
 	if (callusBtnMobile) {
 		callusBtnMobile.classList.toggle('is-hidden', !Boolean(isOpen));
+	}
+	if (phoneBtnHeaderControls) {
+		phoneBtnHeaderControls.classList.toggle('is-hidden', Boolean(isOpen));
 	}
 };
 
@@ -62,6 +97,8 @@ if (arrow && extraPhones) {
 	});
 }
 
+//search-mobile btn
+
 // ======================
 // 🔍 SEARCH BAR
 // ======================
@@ -70,6 +107,9 @@ const openSearchBar = () => {
 	if (navigation) navigation.style.display = 'none';
 	if (searchBtn) searchBtn.style.display = 'none';
 	if (callusContainer) callusContainer.style.display = 'none';
+	if (callusBtnMobile) callusBtnMobile.style.display = 'none';
+	if (langBtnMobilePanel) langBtnMobilePanel.style.display = 'none';
+	if (mobileSearchBtn) mobileSearchBtn.style.display = 'none';
 
 	setTimeout(() => {
 		searchInput.focus();
@@ -81,6 +121,9 @@ const closeSearchBar = () => {
 	if (navigation) navigation.style.display = '';
 	if (searchBtn) searchBtn.style.display = '';
 	if (callusContainer) callusContainer.style.display = '';
+	if (callusBtnMobile) callusBtnMobile.style.display = '';
+	if (langBtnMobilePanel) langBtnMobilePanel.style.display = '';
+	if (mobileSearchBtn) mobileSearchBtn.style.display = '';
 	searchInput.value = '';
 };
 
@@ -95,15 +138,48 @@ if (searchBtn) {
 	});
 }
 
+if (mobileSearchBtn) {
+	mobileSearchBtn.addEventListener('click', e => {
+		e.stopPropagation();
+
+		if (searchBar.classList.contains('is-active')) {
+			closeSearchBar();
+		} else {
+			openSearchBar();
+		}
+	});
+}
+
 // ======================
 // 🧑‍💻 SERVICES DROPDOWN (Новая логика)
 // ======================
 if (servicesBtn && servicesContainer) {
 	servicesBtn.addEventListener('click', e => {
-		e.stopPropagation(); // Предотвращаем немедленное закрытие
+		e.stopPropagation();
 		servicesContainer.classList.toggle('open');
+		let isOpen = false;
+		isOpen = true;
 		if (!servicesContainer.classList.contains('open')) {
+			isOpen = false;
 			resetServiceSubmenus();
+		}
+
+		if (isOpen) {
+			if (window.matchMedia('(max-width: 720px)').matches) {
+				headerWrapperIconUp.style.display = 'none';
+				headerWrapperIconDown.style.display = 'none';
+				navOpenIconUp.style.display = 'block';
+				navOpenIconDown.style.display = 'block';
+				navigationWrapperInnerContent.style.marginBottom = '280px';
+			}
+		} else {
+			if (window.matchMedia('(max-width: 720px)').matches) {
+				navigationWrapperInnerContent.style.marginBottom = '0px';
+				headerWrapperIconUp.style.display = 'block';
+				headerWrapperIconDown.style.display = 'block';
+				navOpenIconUp.style.display = 'none';
+				navOpenIconDown.style.display = 'none';
+			}
 		}
 	});
 }
@@ -122,18 +198,6 @@ serviceSubmenus.forEach(item => {
 // 🌐 GLOBAL CLICK HANDLERS
 // ======================
 document.addEventListener('click', e => {
-	if (
-		navigationWrapper &&
-		navigationWrapper.classList.contains('open') &&
-		!navigationWrapper.contains(e.target) &&
-		!burgerBtn?.contains(e.target)
-	) {
-		navigationWrapper.classList.remove('open');
-		document.body.classList.remove('no-scroll');
-		setBurgerState(false);
-		toggleMobileAuxButtons(false);
-	}
-
 	// Close call-us dropdown
 	if (
 		callusBtn &&
@@ -187,6 +251,7 @@ if (burgerBtn && navigationWrapper) {
 		e.stopPropagation();
 		const isOpen = navigationWrapper.classList.toggle('open');
 		setBurgerState(isOpen);
+
 		toggleMobileAuxButtons(isOpen);
 		document.body.classList.toggle('no-scroll', isOpen);
 	});

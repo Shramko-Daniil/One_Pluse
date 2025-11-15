@@ -25,6 +25,12 @@ a {
 	max-width: 1300px;
 }
 
+@media (max-width: 720px) {
+	.container {
+		max-width: 720px;
+	}
+}
+
 /* Text styles */
 .gradient-text {
 	background: linear-gradient(91.91deg, #092b96 0%, #086cdc 100%);
